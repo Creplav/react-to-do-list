@@ -3,10 +3,12 @@ body {
 }
 
 .container {
-    padding: 30px 15% 30px 15%;
     color: #FFFFFF;
     text-align: center;
-    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
 }
 
 .container h1 {
@@ -18,4 +20,41 @@ body {
 
 .container h3 {
     font-size: 2rem;
+}
+
+.input-area {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+}
+
+#taskInput {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.5rem;
+    border: 5px solid #66AAFF;
+    border-radius: 100px;
+    margin: 0 15px 0 15px;
+    padding: 5px;
+    text-align: center;
+    width: 100%;
+    margin-left: 40px;
+}
+
+button {
+    font-size: 1.5rem;
+    text-align: center;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+button.primary {
+    border: 2px solid #66AAFF;
+    color: #66AAFF;
+}
+
+button.primary:hover {
+    background-color: #66AAFF;
+    color: #FFF;
 }

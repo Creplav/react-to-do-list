@@ -8,11 +8,38 @@ class ToDoList extends React.Component {
 
     constructor(props){
         super(props);
-        let todos = ['Take out the trash', 'Flip a table', 'Shoot something'];
+        this.todos = ['Take out the trash', 'Flip a table', 'Shoot something'];
 
-        this.toDoItems = todos.map((todo) =>
+        this.toDoItems = this.todos.map((todo) =>
             <ToDo value={todo}/>
         );
+
+        this.state = {
+            task: '',
+            todos: [],
+        };
+    }
+
+    updateTaskInputValue(evt){
+        this.setState({
+            task: evt.target.value
+        });
+    }
+
+    insertTaskIntoList(task){
+        this.todos.push(task);
+        this.updateToDoItems();
+    }
+
+    updateToDoItems(){
+        console.log('Updating thing');
+        this.toDoItems = this.todos.map((todo) =>
+            <ToDo value={todo}/>
+        );
+        console.log(this.state.todos)
+        this.setState({
+            todos: this.toDoItems,
+        })
     }
 
 
@@ -21,7 +48,28 @@ class ToDoList extends React.Component {
             <div className="container">
                 <h1>To-Do List</h1>
                 <h3>Tasks</h3>
-                <ul>{this.toDoItems}</ul>
+                <ul>{this.state.toDoItems}</ul>
+                <div className="input-area">
+                    <input
+                        type="text"
+                        id="taskInput"
+                        value={this.state.task}
+                        onChange={(evt) => {
+                            this.updateTaskInputValue(evt)
+                            }}
+                        placeholder="New Todo" />
+
+                    <button class="primary"
+                        onClick={() => {
+                                console.log(this.todos);
+                                this.insertTaskIntoList(this.state.task);
+                                console.log(this.todos);
+                                this.updateToDoItems();
+                            }
+                        }>
+                        &#10010;
+                    </button>
+                </div>
             </div>
         );
     }

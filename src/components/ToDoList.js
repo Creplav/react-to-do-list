@@ -10,14 +10,15 @@ class ToDoList extends React.Component {
         super(props);
         this.todos = ['Take out the trash', 'Flip a table', 'Shoot something'];
 
-        this.toDoItems = this.todos.map((todo) =>
-            <ToDo value={todo}/>
-        );
-
+        
         this.state = {
             task: '',
             todos: [],
         };
+        
+        this.toDoItems = this.todos.map((todo) =>
+            <ToDo value={todo}/>
+        );
     }
 
     updateTaskInputValue(evt){
@@ -26,21 +27,30 @@ class ToDoList extends React.Component {
         });
     }
 
+    addNewTask(){
+        this.insertTaskIntoList(this.state.task)
+        this.updateToDoItems();
+        this.clearTask();
+    }
+
     insertTaskIntoList(task){
         this.todos.push(task);
-        this.updateToDoItems();
     }
 
     updateToDoItems(){
-        console.log('Updating thing');
         this.toDoItems = this.todos.map((todo) =>
             <ToDo value={todo}/>
         );
-        console.log(this.state.todos)
         this.setState({
             todos: this.toDoItems,
         })
     }
+
+    clearTask(){
+        this.setState({
+            task: ''
+        });
+    };
 
 
     render(){
@@ -48,7 +58,7 @@ class ToDoList extends React.Component {
             <div className="container">
                 <h1>To-Do List</h1>
                 <h3>Tasks</h3>
-                <ul>{this.state.toDoItems}</ul>
+                <ul>{this.toDoItems}</ul>
                 <div className="input-area">
                     <input
                         type="text"
@@ -59,12 +69,9 @@ class ToDoList extends React.Component {
                             }}
                         placeholder="New Todo" />
 
-                    <button class="primary"
+                    <button className="primary"
                         onClick={() => {
-                                console.log(this.todos);
-                                this.insertTaskIntoList(this.state.task);
-                                console.log(this.todos);
-                                this.updateToDoItems();
+                                this.addNewTask();
                             }
                         }>
                         &#10010;

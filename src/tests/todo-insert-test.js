@@ -10,5 +10,6 @@ test('new todo is inserted properly', () => {
     const instance = wrapper.instance();
     const taskListLength = instance.todos.length;
     instance.insertTaskIntoList('Hello World');
+    instance.updateToDoItems();
     expect(wrapper.state('todos')).toHaveLength(taskListLength + 1);
 });

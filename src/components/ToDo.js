@@ -18,9 +18,9 @@ class ToDo extends React.Component {
     render() {
         return (
             <div className="todo">
-                <button class="success">&#x2714;</button>
+                <button className="success">&#x2714;</button>
                 <p>{this.props.value}</p>
-                <button class="danger">X</button>
+                <button className="danger">X</button>
             </div>
         )
     }

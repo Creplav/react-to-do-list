@@ -2,81 +2,67 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import ToDo from './ToDo';
-import '../css/todo-list.css';
+import { Grid, Header, Button, Checkbox, Icon, Card, Message, Progress} from 'semantic-ui-react';
 
 class ToDoList extends React.Component {
-
-    constructor(props){
-        super(props);
-        this.todos = ['Take out the trash', 'Flip a table', 'Shoot something'];
-
-        
-        this.state = {
-            task: '',
-            todos: [],
-        };
-        
-        this.toDoItems = this.todos.map((todo) =>
-            <ToDo value={todo}/>
-        );
-    }
-
-    updateTaskInputValue(evt){
-        this.setState({
-            task: evt.target.value
-        });
-    }
-
-    addNewTask(){
-        this.insertTaskIntoList(this.state.task)
-        this.updateToDoItems();
-        this.clearTask();
-    }
-
-    insertTaskIntoList(task){
-        this.todos.push(task);
-    }
-
-    updateToDoItems(){
-        this.toDoItems = this.todos.map((todo) =>
-            <ToDo value={todo}/>
-        );
-        this.setState({
-            todos: this.toDoItems,
-        })
-    }
-
-    clearTask(){
-        this.setState({
-            task: ''
-        });
-    };
-
-
     render(){
         return (
-            <div className="container">
-                <h1>To-Do List</h1>
-                <h3>Tasks</h3>
-                <ul>{this.toDoItems}</ul>
-                <div className="input-area">
-                    <input
-                        type="text"
-                        id="taskInput"
-                        value={this.state.task}
-                        onChange={(evt) => {
-                            this.updateTaskInputValue(evt)
-                            }}
-                        placeholder="New Todo" />
-
-                    <button className="primary"
-                        onClick={() => {
-                                this.addNewTask();
-                            }
-                        }>
-                        &#10010;
-                    </button>
-                </div>
+            <div>
+                <Header size='huge'>To-Do List</Header>
+                <Progress value='0' total='10' progress='ratio' label='Tasks completed' color='blue'/>
+                <Grid columns={1}>
+                    <Grid.Column>
+                        <Checkbox toggle label='Simple View'/>
+                    </Grid.Column>
+                    <Grid.Column>
+                        <Button primary icon labelPosition='left'>
+                            <Icon name='add'/>
+                            New Todo
+                        </Button>
+                    </Grid.Column>
+                </Grid>
+                <hr/>
+                {/* <Message size='massive' color='blue'>Awesome! You're all done! Go relax!</Message> */}
+                <Card.Group centered>
+                    <Card fluid>
+                        <Card.Content>
+                            <Card.Header>Clean Room</Card.Header>
+                            <Card.Meta>
+                                <p>Assigned to:  
+                                    <Icon circular inverted color='grey' name='user'/>
+                                    <Icon circular inverted color='grey' name='user'/>
+                                    <Icon circular inverted color='grey' name='user'/>
+                                    <p>+ 4 more</p>
+                                </p>
+                            </Card.Meta>
+                            <Card.Description>
+                                Room needs to be cleaned
+                            </Card.Description>
+                        </Card.Content>
+                        <Card.Content extra>
+                            <p>Due 1/2/18</p>
+                            <Button.Group>
+                                <Button negative>Delete</Button>
+                                <Button.Or/>
+                                <Button positive>Finished</Button>
+                            </Button.Group>
+                        </Card.Content>
+                    </Card>
+                    <Card fluid>
+                        <Card.Content>
+                            <Card.Header>Wash the dishes</Card.Header>
+                            <Card.Description>The dishes are in the kitchen and they need to be washed.</Card.Description>
+                        </Card.Content>
+                        <Card.Content extra>
+                            <p>Due 12/12/18</p>
+                            <Button.Group>
+                                <Button negative>Delete</Button>
+                                <Button.Or/>
+                                <Button positive>Finished</Button>
+                            </Button.Group>
+                        </Card.Content>
+                    </Card>
+                </Card.Group>
             </div>
         );
     }
